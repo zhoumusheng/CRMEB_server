@@ -47,7 +47,11 @@ class UploadService
         self::$uploadStatus->filePath = self::pathToUrl($filePath);
         self::$uploadStatus->fileInfo = $fileInfo;
         self::$uploadStatus->uploadPath = $path;
-        self::$uploadStatus->dir = $filePath;
+        if(strpos(PUBILC_PATH,'public') !== false){
+            self::$uploadStatus->dir = $filePath;
+        }else{
+            self::$uploadStatus->dir = str_replace('/public','',$filePath);
+        }
         self::$uploadStatus->status = true;
         return self::$uploadStatus;
     }
@@ -79,7 +83,7 @@ class UploadService
      */
     protected static function uploadDir($path, $root=null)
     {
-        if($root === null) $root = 'public' . DS . 'uploads';
+        if($root === null) $root = UPLOAD_PATH;
         return $root . DS . $path;
     }
 
@@ -153,9 +157,9 @@ class UploadService
      * @param string $pre 前缀
      * @return string 压缩图片路径
      */
-    public static function thumb($filePath, $ratio=8, $pre='s_')
+    public static function thumb($filePath, $ratio=5, $pre='s_')
     {
-        $filePath = '.'.ltrim($filePath,'.');
+        $filePath = ltrim($filePath,'/');
         $img = self::openImage($filePath);
         $width = $img->width() * $ratio / 10;
         $height = $img->height() * $ratio / 10;
@@ -163,6 +167,6 @@ class UploadService
         $fileName = basename($filePath);
         $savePath = $dir.DS.$pre.$fileName;
         $img->thumb($width,$height)->save($savePath);
-        return ltrim($savePath,'.');
+        return DS.$savePath;
     }
 }

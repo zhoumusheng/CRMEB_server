@@ -54,9 +54,10 @@ class Images extends AuthController
         $pid = input('pid')!=''?input('pid'):0;
 
         $res = Upload::image('file',$pid.'/'.date('Ymd'));
+        $thumbPath = Upload::thumb($res->dir);
         //产品图片上传记录
         $fileInfo = $res->fileInfo->getinfo();
-        SystemAttachmentModel::attachmentAdd($res->fileInfo->getSaveName(),$fileInfo['size'],$fileInfo['type'],$res->dir,'',$pid);
+        SystemAttachmentModel::attachmentAdd($res->fileInfo->getSaveName(),$fileInfo['size'],$fileInfo['type'],$res->dir,$thumbPath,$pid);
         $info = array(
 //            "originalName" => $fileInfo['name'],
 //            "name" => $res->fileInfo->getSaveName(),
@@ -91,8 +92,14 @@ class Images extends AuthController
     public function deleteimganddata($att_id){
         $attinfo = SystemAttachmentModel::get($att_id)->toArray();
         if($attinfo){
-            @unlink(ROOT_PATH.ltrim($attinfo['att_dir'],'.'));
-            @unlink(ROOT_PATH.ltrim($attinfo['satt_dir'],'.'));
+            if(strpos($attinfo['att_dir'],'public') !== false){
+                @unlink(ROOT_PATH.ltrim($attinfo['att_dir'],'/'));
+                @unlink(ROOT_PATH.ltrim($attinfo['satt_dir'],'/'));
+            }else{
+                @unlink(ROOT_PATH.ltrim('public'.$attinfo['att_dir'],'/'));
+                @unlink(ROOT_PATH.ltrim('public'.$attinfo['satt_dir'],'/'));
+            }
+
             SystemAttachmentModel::where(['att_id'=>$att_id])->delete();
         }
     }

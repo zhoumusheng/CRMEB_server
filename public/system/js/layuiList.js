@@ -108,6 +108,7 @@
         if(is_tables!=true) this.odj=odj;
         if(that.elemOdj[odj]==undefined) that.elemOdj[odj]=odj;
         var elemOdj=that.elemOdj[this.odj];
+        console.log(that.elemOdj);
         that.tableIns = that.table.render({
             id:boxids,
             elem: '#' +elemOdj,
@@ -162,11 +163,13 @@
         }
     }
     //监听列表
-    layList.tool = function (EventFn, fieldStr,odj) {
+    layList.tool = function (EventFn, fieldStr,odjs) {
         var that = this;
         // var elemOdj=elemOdj || that.elemOdj
-        var elemOdj=that.elemOdj[odj || this.odj];
+        var elemOdj=that.elemOdj[odjs || this.odj];
+        console.log(elemOdj);
         this.table.on('tool(' + elemOdj + ')', function (obj) {
+            console.log(obj)
             var data = obj.data, layEvent = obj.event;
             if (typeof EventFn == 'function') {
                 EventFn(layEvent, data,obj);
