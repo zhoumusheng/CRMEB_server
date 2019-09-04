@@ -10,7 +10,7 @@
         <img src="https://img.shields.io/badge/Licence-GPL3.0-green.svg?style=flat" />
     </a>
     <a href="http://www.crmeb.com">
-        <img src="https://img.shields.io/badge/Edition-2.6-blue.svg" />
+        <img src="https://img.shields.io/badge/Edition-3.0-blue.svg" />
     </a>
      <a href="https://gitee.com/ZhongBangKeJi/CRMEB/repository/archive/master.zip">
         <img src="https://img.shields.io/badge/download-80m-red.svg" />
@@ -18,10 +18,24 @@
 </p>
 
 ### 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！
-### github地址：
-https://github.com/xazbkj/CRMEB
-### 纯小程序版：
-https://gitee.com/ZhongBangKeJi/CRMEB_WeChatMiniProgram
++ CRMEB后端程序下载地址
+
+  + 码云:https://gitee.com/ZhongBangKeJi/CRMEB.git
+  
+  + github:https://github.com/crmeb/CRMEB
+
++ 微信小程序版前端界面
+  
+   + github:https://github.com/crmeb/CRMEB_WechatApplet_v3.0
+  
+   + 码云：https://gitee.com/ZhongBangKeJi/CRMEB_WechatApplet_v3.0
+  
++ H5版前端界面
+  
+   + github:https://github.com/crmeb/CRMEB-H5-3.0
+  
+   + 码云：https://gitee.com/ZhongBangKeJi/CRMEB-H5-3.0
+   
 ### 帮助文档：
 https://help.crmeb.net/crmeb
 ### 论坛地址:
