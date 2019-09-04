@@ -150,12 +150,11 @@ class StoreOrder extends BaseModel
             }else if($item['paid']==1 && $item['refund_status']==1){
                 $refundReasonTime = date('Y-m-d H:i', $item['refund_reason_time']);
                 $refundReasonWapImg = json_decode($item['refund_reason_wap_img'], true);
+                $refundReasonWapImg = $refundReasonWapImg && is_array($refundReasonWapImg) ? $refundReasonWapImg : [];
                 $img = '';
-                if(count($refundReasonWapImg) && is_array($refundReasonWapImg)){
-                    foreach ($refundReasonWapImg as $itemImg){
-                        if(strlen(trim($itemImg)))
-                            $img .='<img style="height:50px;" src="'.$itemImg.'" />';
-                    }
+                foreach ($refundReasonWapImg as $itemImg){
+                    if(strlen(trim($itemImg)))
+                        $img .='<img style="height:50px;" src="'.$itemImg.'" />';
                 }
                 if(!strlen(trim($img)))  $img = '无';
                 $item['status_name']=<<<HTML
