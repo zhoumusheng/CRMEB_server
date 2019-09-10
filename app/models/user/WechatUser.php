@@ -159,7 +159,7 @@ class WechatUser extends BaseModel
             }
         }
         self::beginTrans();
-        $wechatUser = self::create($userInfo);
+        $wechatUser = self::create(is_object($userInfo) ? $userInfo->toArray() : $userInfo);
         if(!$wechatUser){
             self::rollbackTrans();
             exception('用户储存失败!');
